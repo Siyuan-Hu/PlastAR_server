@@ -26,7 +26,10 @@ namespace Plastar
             // 
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             // 
+            //Response.Write("<script>alert('init')</script>");
             ViewState["uploaded"] = false;
+            ViewState["building"] = false;
+            ViewState["uploading"] = false;
             InitializeComponent();
             base.OnInit(e);
         }
@@ -40,7 +43,6 @@ namespace Plastar
             this.Submit1.ServerClick += new System.EventHandler(this.Submit1_ServerClick);
             this.Build1.Click += new System.EventHandler(this.Build1_Click);
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
 
         private void Build1_Click(object sender, System.EventArgs e)
@@ -64,6 +66,18 @@ namespace Plastar
                 Response.Write("<script>alert('Upload your cast first!')</script>");
                 return;
             }
+
+            //if ((bool)ViewState["building"])
+            //{
+            //    Response.Write("<script>alert('Wait for building!')</script>");
+            //    return;
+            //}
+
+            //if ((bool)ViewState["uploading"])
+            //{
+            //    Response.Write("<script>alert('Wait for uploading!')</script>");
+            //    return;
+            //}
 
             string argument = DateTime.Now.ToFileTime().ToString();
 
@@ -96,6 +110,7 @@ namespace Plastar
             myCon.Close();
 
             ViewState["uploaded"] = false;
+            //ViewState["building"] = false;
             //Response.Write("<script>alert('"+"done!!"+"')</script>");
         }
 
@@ -129,6 +144,18 @@ namespace Plastar
             //    Response.Write("Please select a file to upload.");
             //}
 
+            //if ((bool)ViewState["building"])
+            //{
+            //    Response.Write("<script>alert('Wait for building!')</script>");
+            //    return;
+            //}
+
+            //if ((bool)ViewState["uploading"])
+            //{
+            //    Response.Write("<script>alert('Wait for uploading!')</script>");
+            //    return;
+            //}
+
             string extractPath = Server.MapPath("AssetsBundle") + "\\resource\\";
             if (File1.PostedFile.FileName != "cast.zip")
             {
@@ -153,8 +180,12 @@ namespace Plastar
                         ViewState["name"] = str;
                     }
                 }
+
+                //ViewState["uploading"] = true;
+
                 zip.ExtractAll(extractPath, ExtractExistingFileAction.DoNotOverwrite);
                 ViewState["uploaded"] = true;
+                //ViewState["uploading"] = false;
             }
 
             Response.Write("<script>alert('" + "done!!!" + "')</script>");
