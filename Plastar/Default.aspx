@@ -34,9 +34,15 @@
         input.addEventListener('change', function( e ){
             if(input) {
                 filename = e.target.value.split('\\').pop();
-                document.querySelector('.FileContainerDescription').innerHTML = "<b>" + filename + "</b> is chosen.";
-                document.querySelector('.FileContainer').style.backgroundColor = "#bbb";
-                document.querySelector('.UploadButton').classList.remove('hidden');
+                var format = filename.substr(filename.indexOf('.') + 1);
+                if (format === "zip") {
+                    document.querySelector('.FileContainerDescription').innerHTML = "<b>" + filename + "</b> is chosen.";
+                    document.querySelector('.FileContainer').style.backgroundColor = "#bbb";
+                    document.querySelector('.UploadButton').classList.remove('hidden');
+                }
+                else {
+                    document.querySelector('.FileContainerDescription').innerHTML = "<span style='color: red'>Please choose a zip file. </span>";
+                }
             }
             else {
                 document.querySelector('.FileContainerDescription').innerHTML = "No file chooooooosen."
