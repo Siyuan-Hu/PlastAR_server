@@ -17,12 +17,11 @@
                         <input class="Inputfile" type="file" id="File1" name="File1" runat="server" />
                     </label>
                 </div>
-
-                <input class="Upload" type="submit" id="Submit1" value="Upload" runat="server" />
+                <input class="UploadButton hidden" type="submit" id="Submit1" value="Upload" runat="server" />
             </div>                    
-            <br>
-            <br>
-            <div class="BuildButtonContainer">
+
+
+            <div class="BuildButtonContainer hidden">
                 <asp:Button ID="Build1" runat="server" Text="Build" CssClass="BuildButton" />
             </div>
         </div>
@@ -35,7 +34,9 @@
         input.addEventListener('change', function( e ){
             if(input) {
                 filename = e.target.value.split('\\').pop();
-                document.querySelector('.FileContainerDescription').innerHTML = "<b>" + filename + "</b> is chosen. ";
+                document.querySelector('.FileContainerDescription').innerHTML = "<b>" + filename + "</b> is chosen.";
+                document.querySelector('.FileContainer').style.backgroundColor = "#bbb";
+                document.querySelector('.UploadButton').classList.remove('hidden');
             }
             else {
                 document.querySelector('.FileContainerDescription').innerHTML = "No file chooooooosen."
