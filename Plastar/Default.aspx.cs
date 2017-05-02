@@ -95,7 +95,7 @@ namespace Plastar
             //process.WaitForExit();
 
             string name = "husiyuan";
-            string path = Server.MapPath("AssetsBundle") + "\\AssetsBundle\\" + argument;
+            string path = "\\AssetsBundle\\AssetsBundle\\" + argument + "\\marker";
             string snapshot = argument + "\\000.png";
 
             string con = "Data Source=128.2.238.5;Initial Catalog=plastar;User ID=plastar;Password=husiyuan";
