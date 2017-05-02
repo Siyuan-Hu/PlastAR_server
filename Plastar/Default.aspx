@@ -28,10 +28,12 @@
     </div>
 
     <script>
-        var input = document.querySelector('.Inputfile');
-        var filename = "";
+        var input = document.querySelector('.Inputfile')
+        ,   upload = document.querySelector('.UploadButton')
+        ,   filename = "";
         
-        input.addEventListener('change', function( e ){
+        //choose file
+        input.addEventListener('change', function (e) {
             if(input) {
                 filename = e.target.value.split('\\').pop();
                 var format = filename.substr(filename.indexOf('.') + 1);
@@ -47,6 +49,12 @@
             else {
                 document.querySelector('.FileContainerDescription').innerHTML = "No file chooooooosen."
             }
+        });
+
+        //upload
+        upload.addEventListener('click', function (e) {
+            document.querySelector('.UploadContainer').classList.add('hidden');
+            document.querySelector('.BuildButtonContainer').classList.remove('hidden');
         });
     </script>
 
