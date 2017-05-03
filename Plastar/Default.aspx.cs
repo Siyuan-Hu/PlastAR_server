@@ -95,7 +95,7 @@ namespace Plastar
             //process.WaitForExit();
 
             string name = "husiyuan";
-            string path = Server.MapPath("AssetsBundle") + "\\AssetsBundle\\" + argument;
+            string path = "/AssetsBundle/AssetsBundle/" + argument + "/marker.jpg";
             string snapshot = argument + "\\000.png";
 
             string con = "Data Source=128.2.238.5;Initial Catalog=plastar;User ID=plastar;Password=husiyuan";
@@ -168,14 +168,22 @@ namespace Plastar
                 for (int i = 0; i < zip.EntryFileNames.Count; i++)
                 {
                     //Response.Write("<script>alert('" + zip.EntryFileNames.ElementAt(i) + "')</script>");
-                    if (zip.EntryFileNames.ElementAt(i).Substring(0, 4) != "cast")
+
+                    //if (zip.EntryFileNames.ElementAt(i).Substring(0, 4) != "cast")
+                    //{
+                    //    Response.Write("<script>alert('File structure not valid!')</script>");
+                    //    return;
+                    //}
+
+                    //if (zip.EntryFileNames.ElementAt(i).Substring(0, 10) != "cast/model")
+                    //{
+                    //    string str = zip.EntryFileNames.ElementAt(i).Substring(5);
+                    //    str = str.Substring(0, str.Length - 1);
+                    //    ViewState["name"] = str;
+                    //}
+                    if (zip.EntryFileNames.ElementAt(i).Length>10 && zip.EntryFileNames.ElementAt(i).Substring(0, 10) == "cast/name/")
                     {
-                        Response.Write("<script>alert('File structure not valid!')</script>");
-                        return;
-                    }
-                    if (zip.EntryFileNames.ElementAt(i).Substring(0, 10) != "cast/model")
-                    {
-                        string str = zip.EntryFileNames.ElementAt(i).Substring(5);
+                        string str = zip.EntryFileNames.ElementAt(i).Substring(10);
                         str = str.Substring(0, str.Length - 1);
                         ViewState["name"] = str;
                     }
