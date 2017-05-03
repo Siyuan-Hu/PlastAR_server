@@ -25,6 +25,7 @@
                 <asp:Button ID="Build1" runat="server" Text="Build" CssClass="BuildButton" />
             </div>
         </div>
+        <asp:TextBox ID="status" Text="uploading" runat="server"></asp:TextBox>
     </div>
 
     <script>

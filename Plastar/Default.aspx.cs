@@ -196,6 +196,7 @@ namespace Plastar
                 //ViewState["uploading"] = false;
             }
 
+            status.Text = "uploaded";
             Response.Write("<script>alert('" + "done!!!" + "')</script>");
         }
     }
