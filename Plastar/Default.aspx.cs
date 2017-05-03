@@ -61,6 +61,8 @@ namespace Plastar
 
             //Console.WriteLine("hehe");
 
+            status.Text = "building";
+
             if (!(bool)ViewState["uploaded"])
             {
                 Response.Write("<script>alert('Upload your cast first!')</script>");
@@ -110,6 +112,7 @@ namespace Plastar
             myCon.Close();
 
             ViewState["uploaded"] = false;
+            status.Text = "built";
             //ViewState["building"] = false;
             //Response.Write("<script>alert('"+"done!!"+"')</script>");
         }
@@ -155,6 +158,7 @@ namespace Plastar
             //    Response.Write("<script>alert('Wait for uploading!')</script>");
             //    return;
             //}
+            status.Text = "uploading";
 
             string extractPath = Server.MapPath("AssetsBundle") + "\\resource\\";
             if (File1.PostedFile.FileName != "cast.zip")
