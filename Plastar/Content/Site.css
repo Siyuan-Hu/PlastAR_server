@@ -84,6 +84,10 @@ input[type="select"] {
 
 /* Upload page override*/
 
+#MainContent_status {
+    display: none;
+}
+
 .UploadContainer {
     text-align: center;
 }
