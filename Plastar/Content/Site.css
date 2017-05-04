@@ -136,6 +136,12 @@ input[type="select"] {
     text-align: center;
 }
 
+.BuildIcon {
+    width: 150px;
+    height: 150px;
+    margin: 50px;
+}
+
 .hidden {
     display:  none;
 }

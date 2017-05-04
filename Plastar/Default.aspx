@@ -22,6 +22,7 @@
 
 
             <div class="BuildButtonContainer hidden">
+                <img class="BuildIcon" src="https://www.casadeco.com.ro/wp-content/uploads/2016/12/256-256-1cf7344e1bb0b0dac4d06d0ed991fd4e.png" />
                 <asp:Button ID="Build1" runat="server" Text="Build" CssClass="BuildButton" />
             </div>
         </div>
