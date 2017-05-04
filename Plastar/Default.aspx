@@ -29,6 +29,9 @@
     </div>
 
     <script>
+        var status = document.getElementById("MainContent_status").value
+        console.log(status);
+
         var input = document.querySelector('.Inputfile')
         ,   upload = document.querySelector('.UploadButton')
         ,   filename = "";
@@ -38,7 +41,7 @@
             if(input) {
                 filename = e.target.value.split('\\').pop();
                 var format = filename.substr(filename.indexOf('.') + 1);
-                if (format === "zip") {
+                if(format === "zip") {
                     document.querySelector('.FileContainerDescription').innerHTML = "<b>" + filename + "</b> is chosen.";
                     document.querySelector('.FileContainer').style.backgroundColor = "#bbb";
                     document.querySelector('.UploadButton').classList.remove('hidden');
@@ -52,11 +55,11 @@
             }
         });
 
-        //upload
-        upload.addEventListener('click', function (e) {
+        //build
+        if(status == 'uploaded') {
             document.querySelector('.UploadContainer').classList.add('hidden');
             document.querySelector('.BuildButtonContainer').classList.remove('hidden');
-        });
+        }
     </script>
 
 </asp:Content>
