@@ -168,29 +168,24 @@ namespace Plastar
             }
             using (ZipFile zip = ZipFile.Read(File1.PostedFile.InputStream))
             {
+                bool flag = false;
                 //Response.Write("<script>alert('"+zip.EntryFileNames.ElementAt(0)+"')</script>");
                 for (int i = 0; i < zip.EntryFileNames.Count; i++)
                 {
-                    //Response.Write("<script>alert('" + zip.EntryFileNames.ElementAt(i) + "')</script>");
-
-                    //if (zip.EntryFileNames.ElementAt(i).Substring(0, 4) != "cast")
-                    //{
-                    //    Response.Write("<script>alert('File structure not valid!')</script>");
-                    //    return;
-                    //}
-
-                    //if (zip.EntryFileNames.ElementAt(i).Substring(0, 10) != "cast/model")
-                    //{
-                    //    string str = zip.EntryFileNames.ElementAt(i).Substring(5);
-                    //    str = str.Substring(0, str.Length - 1);
-                    //    ViewState["name"] = str;
-                    //}
                     if (zip.EntryFileNames.ElementAt(i).Length>10 && zip.EntryFileNames.ElementAt(i).Substring(0, 10) == "cast/name/")
                     {
                         string str = zip.EntryFileNames.ElementAt(i).Substring(10);
                         str = str.Substring(0, str.Length - 1);
                         ViewState["name"] = str;
+
+                        flag = true;
                     }
+                }
+
+                if (!flag)
+                {
+                    Response.Write("<script>alert('File structure not valid!')</script>");
+                    return;
                 }
 
                 //ViewState["uploading"] = true;
