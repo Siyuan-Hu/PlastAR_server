@@ -123,6 +123,8 @@ input[type="select"] {
 }
 
 .UploadButton {
+    width: 177px;
+    height: 47px;
     background-color: #2f8030;
     padding: 10px 30px;
     font-size: 18px;
@@ -132,7 +134,7 @@ input[type="select"] {
     border: none;
 }
 
-.BuildButtonContainer {
+.BuildContainer {
     text-align: center;
 }
 
@@ -140,6 +142,22 @@ input[type="select"] {
     width: 150px;
     height: 150px;
     margin: 50px;
+}
+
+.BuildButtonContainer {
+    margin: 30px;
+}
+
+.BuildButton {
+    width: 177px;
+    height: 47px;
+    color: #fff;
+    background-color: #2f8030;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 30px;
+    border: none;
 }
 
 .hidden {
