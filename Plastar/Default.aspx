@@ -21,14 +21,21 @@
             </div>                    
 
 
-            <div class="BuildButtonContainer hidden">
-                <asp:Button ID="Build1" runat="server" Text="Build" CssClass="BuildButton" />
+            <div class="BuildContainer hidden">
+                <img class="BuildIcon" src="https://www.casadeco.com.ro/wp-content/uploads/2016/12/256-256-1cf7344e1bb0b0dac4d06d0ed991fd4e.png" />
+                <p class="BuildFileDescription"></p>
+                <div class="BuildButtonContainer">  
+                    <asp:Button ID="Build1" runat="server" Text="Build" CssClass="BuildButton" />
+                </div>
             </div>
         </div>
         <asp:TextBox ID="status" Text="uploading" runat="server"></asp:TextBox>
     </div>
 
     <script>
+        var status = document.getElementById("MainContent_status").value
+        console.log(status);
+
         var input = document.querySelector('.Inputfile')
         ,   upload = document.querySelector('.UploadButton')
         ,   filename = "";
@@ -38,10 +45,11 @@
             if(input) {
                 filename = e.target.value.split('\\').pop();
                 var format = filename.substr(filename.indexOf('.') + 1);
-                if (format === "zip") {
+                if(format === "zip") {
                     document.querySelector('.FileContainerDescription').innerHTML = "<b>" + filename + "</b> is chosen.";
                     document.querySelector('.FileContainer').style.backgroundColor = "#bbb";
                     document.querySelector('.UploadButton').classList.remove('hidden');
+                    localStorage.setItem("filename", filename);
                 }
                 else {
                     document.querySelector('.FileContainerDescription').innerHTML = "<span style='color: red'>Please choose a zip file. </span>";
@@ -52,11 +60,14 @@
             }
         });
 
-        //upload
-        upload.addEventListener('click', function (e) {
+        //build
+        if (status == 'uploaded') {
+            var filename = localStorage.getItem('filename');
+
+            document.querySelector('.BuildFileDescription').innerHTML = "<b>" + filename + "</b> is uploaded and ready to be built.";
             document.querySelector('.UploadContainer').classList.add('hidden');
-            document.querySelector('.BuildButtonContainer').classList.remove('hidden');
-        });
+            document.querySelector('.BuildContainer').classList.remove('hidden');
+        }
     </script>
 
 </asp:Content>
