@@ -91,7 +91,7 @@ namespace Plastar
             var process = new Process { StartInfo = si };
             process.Start();
 
-            Thread.Sleep(15000);
+            Thread.Sleep(30000);
             //process.WaitForExit(10000);
             //process.Exited += new EventHandler(captureExit);
             //process.WaitForExit();
@@ -169,6 +169,7 @@ namespace Plastar
             using (ZipFile zip = ZipFile.Read(File1.PostedFile.InputStream))
             {
                 bool flag = false;
+
                 //Response.Write("<script>alert('"+zip.EntryFileNames.ElementAt(0)+"')</script>");
                 for (int i = 0; i < zip.EntryFileNames.Count; i++)
                 {
