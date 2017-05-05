@@ -27,8 +27,8 @@
                 <div class="BuildButtonContainer">  
                     <asp:Button ID="Build1" runat="server" Text="Build" CssClass="BuildButton" />
                 </div>
-                <div class="ProgressBarContainer">
-                    <div class="ProgressBar">10%</div>
+                <div class="ProgressBarContainer hidden">
+                    <div class="ProgressBar"></div>
                 </div>
             </div>
         </div>
@@ -74,18 +74,31 @@
         }
 
         //building
-        build.addEventListener('click', function (e) {
+        build.addEventListener('click', function () {
+            document.querySelector('.ProgressBarContainer').classList.remove('hidden');
             var bar = document.querySelector('.ProgressBar');
-            var width = 10;
-            var id = setInterval(frame, 30);
+            var left = 0;
+            var id = setInterval(frame, 10);
+            var direction = 1;
+
             function frame() {
-                if (width >= 100) {
-                    clearInterval(id);
+                if (direction == 1) {
+                    if (left <= 80) {
+                        left++;
+                        bar.style.left = left + '%';
+                    }
+                    else {
+                        direction = -1;
+                    }
                 }
                 else {
-                    width++;
-                    bar.style.width = width + '%';
-                    bar.innerHTML = width * 1 + '%';
+                    if (left >= 0) {
+                        left--;
+                        bar.style.left = left + '%';
+                    }
+                    else {
+                        direction = 1;
+                    }
                 }
             }
         })
