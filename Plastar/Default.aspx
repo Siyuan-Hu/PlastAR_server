@@ -31,6 +31,12 @@
                     <div class="ProgressBar"></div>
                 </div>
             </div>
+
+            <div class="SuccessContainer hidden">
+                <img class="SuccessIcon" src="https://www.originalvapery.com/wp-content/uploads/2015/05/success-icon-check-02.png" />
+                <p class="SuccessDescription">Build comleted. Tango app is updated and ready to go. </p>
+                <button onclick="reload()" class="RefreshButton">Upload next cast</button>
+            </div>
         </div>
         <asp:TextBox ID="status" Text="uploading" runat="server"></asp:TextBox>
     </div>
@@ -101,7 +107,18 @@
                     }
                 }
             }
-        })
+        });
+
+        //build completed
+        if (status == 'built') {
+            document.querySelector('.SuccessContainer').classList.remove('hidden');
+            document.querySelector('.UploadContainer').classList.add('hidden');
+        }
+
+        //reload
+        function reload() {
+            location.reload();
+        }
     </script>
 
 </asp:Content>

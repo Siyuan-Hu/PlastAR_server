@@ -175,6 +175,28 @@ input[type="select"] {
     text-align: right;
 }
 
+.SuccessContainer {
+    text-align: center;
+}
+
+.SuccessIcon {
+    width: 150px;
+    height: 150px;
+    margin: 50px;
+}
+
+.RefreshButton {
+    width: 177px;
+    height: 47px;
+    color: #fff;
+    background-color: #2f8030;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    margin: 30px;
+}
+
 .hidden {
     display:  none;
 }
