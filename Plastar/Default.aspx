@@ -27,6 +27,15 @@
                 <div class="BuildButtonContainer">  
                     <asp:Button ID="Build1" runat="server" Text="Build" CssClass="BuildButton" />
                 </div>
+                <div class="ProgressBarContainer hidden">
+                    <div class="ProgressBar"></div>
+                </div>
+            </div>
+
+            <div class="SuccessContainer hidden">
+                <img class="SuccessIcon" src="https://www.originalvapery.com/wp-content/uploads/2015/05/success-icon-check-02.png" />
+                <p class="SuccessDescription">Build completed. Tango app is updated and ready to go. </p>
+                <button onclick="reload()" class="RefreshButton">Upload next cast</button>
             </div>
         </div>
         <asp:TextBox ID="status" Text="uploading" runat="server"></asp:TextBox>
@@ -37,8 +46,9 @@
         console.log(status);
 
         var input = document.querySelector('.Inputfile')
-        ,   upload = document.querySelector('.UploadButton')
-        ,   filename = "";
+        , upload = document.querySelector('.UploadButton')
+        , build = document.querySelector('.BuildButton')
+        , filename = "";
         
         //choose file
         input.addEventListener('change', function (e) {
@@ -67,6 +77,47 @@
             document.querySelector('.BuildFileDescription').innerHTML = "<b>" + filename + "</b> is uploaded and ready to be built.";
             document.querySelector('.UploadContainer').classList.add('hidden');
             document.querySelector('.BuildContainer').classList.remove('hidden');
+        }
+
+        //building
+        build.addEventListener('click', function () {
+            document.querySelector('.ProgressBarContainer').classList.remove('hidden');
+            var bar = document.querySelector('.ProgressBar');
+            var left = 0;
+            var id = setInterval(frame, 10);
+            var direction = 1;
+
+            function frame() {
+                if (direction == 1) {
+                    if (left <= 80) {
+                        left++;
+                        bar.style.left = left + '%';
+                    }
+                    else {
+                        direction = -1;
+                    }
+                }
+                else {
+                    if (left >= 0) {
+                        left--;
+                        bar.style.left = left + '%';
+                    }
+                    else {
+                        direction = 1;
+                    }
+                }
+            }
+        });
+
+        //build completed
+        if (status == 'built') {
+            document.querySelector('.SuccessContainer').classList.remove('hidden');
+            document.querySelector('.UploadContainer').classList.add('hidden');
+        }
+
+        //reload
+        function reload() {
+            location.reload();
         }
     </script>
 
