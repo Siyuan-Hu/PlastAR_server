@@ -27,6 +27,9 @@
                 <div class="BuildButtonContainer">  
                     <asp:Button ID="Build1" runat="server" Text="Build" CssClass="BuildButton" />
                 </div>
+                <div class="ProgressBarContainer">
+                    <div class="ProgressBar">10%</div>
+                </div>
             </div>
         </div>
         <asp:TextBox ID="status" Text="uploading" runat="server"></asp:TextBox>
@@ -37,8 +40,9 @@
         console.log(status);
 
         var input = document.querySelector('.Inputfile')
-        ,   upload = document.querySelector('.UploadButton')
-        ,   filename = "";
+        , upload = document.querySelector('.UploadButton')
+        , build = document.querySelector('.BuildButton')
+        , filename = "";
         
         //choose file
         input.addEventListener('change', function (e) {
@@ -68,6 +72,23 @@
             document.querySelector('.UploadContainer').classList.add('hidden');
             document.querySelector('.BuildContainer').classList.remove('hidden');
         }
+
+        //building
+        build.addEventListener('click', function (e) {
+            var bar = document.querySelector('.ProgressBar');
+            var width = 10;
+            var id = setInterval(frame, 30);
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                }
+                else {
+                    width++;
+                    bar.style.width = width + '%';
+                    bar.innerHTML = width * 1 + '%';
+                }
+            }
+        })
     </script>
 
 </asp:Content>

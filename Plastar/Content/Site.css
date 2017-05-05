@@ -160,6 +160,19 @@ input[type="select"] {
     border: none;
 }
 
+.ProgressBarContainer {
+    width: 50%;
+    margin: auto;
+    background-color: #efefef;
+}
+
+.ProgressBar {
+    width: 1%;
+    height: 5px;
+    background-color: #2f8030; 
+    text-align: right;
+}
+
 .hidden {
     display:  none;
 }
