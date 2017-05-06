@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-md-12">
             <h2>Upload</h2>
-            <p class="Description">
-                Please upload your resource.
+            <p class="PageDescription">
+                Upload a zip file to add a new cast. 
             </p>
             <div class="UploadContainer">
                 <img class="UploadIcon" src="https://maxcdn.icons8.com/Share/icon/Network//upload_to_cloud1600.png" /> 
