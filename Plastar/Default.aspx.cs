@@ -91,7 +91,7 @@ namespace Plastar
             var process = new Process { StartInfo = si };
             process.Start();
 
-            Thread.Sleep(30000);
+            Thread.Sleep(40000);
             //process.WaitForExit(10000);
             //process.Exited += new EventHandler(captureExit);
             //process.WaitForExit();
