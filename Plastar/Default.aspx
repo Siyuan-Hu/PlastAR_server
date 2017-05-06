@@ -82,6 +82,9 @@
         //building
         build.addEventListener('click', function () {
             document.querySelector('.ProgressBarContainer').classList.remove('hidden');
+            build.style.backgroundColor = '#bbb';
+            build.disabled = true;
+
             var bar = document.querySelector('.ProgressBar');
             var left = 0;
             var id = setInterval(frame, 10);
