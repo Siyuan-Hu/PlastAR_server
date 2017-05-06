@@ -58,6 +58,7 @@
                 if(format === "zip") {
                     document.querySelector('.FileContainerDescription').innerHTML = "<b>" + filename + "</b> is chosen.";
                     document.querySelector('.FileContainer').style.backgroundColor = "#bbb";
+                   // document.querySelector('.FileContainer').innerHTML = "Change a .zip";
                     document.querySelector('.UploadButton').classList.remove('hidden');
                     localStorage.setItem("filename", filename);
                 }
