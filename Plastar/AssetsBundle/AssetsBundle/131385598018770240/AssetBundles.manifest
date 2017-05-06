@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 3242119914
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: marker
+      Dependencies: {}

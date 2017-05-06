@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-md-12">
             <h2>Upload</h2>
-            <p class="Description">
-                Please upload your resource.
+            <p class="PageDescription">
+                Upload a zip file to add a new cast. 
             </p>
             <div class="UploadContainer">
                 <img class="UploadIcon" src="https://maxcdn.icons8.com/Share/icon/Network//upload_to_cloud1600.png" /> 
@@ -44,7 +44,6 @@
     <script>
         var status = document.getElementById("MainContent_status").value
         console.log(status);
-
         var input = document.querySelector('.Inputfile')
         , upload = document.querySelector('.UploadButton')
         , build = document.querySelector('.BuildButton')
@@ -58,6 +57,7 @@
                 if(format === "zip") {
                     document.querySelector('.FileContainerDescription').innerHTML = "<b>" + filename + "</b> is chosen.";
                     document.querySelector('.FileContainer').style.backgroundColor = "#bbb";
+                   // document.querySelector('.FileContainer').innerHTML = "Change a .zip";
                     document.querySelector('.UploadButton').classList.remove('hidden');
                     localStorage.setItem("filename", filename);
                 }
@@ -69,24 +69,23 @@
                 document.querySelector('.FileContainerDescription').innerHTML = "No file chooooooosen."
             }
         });
-
         //build
         if (status == 'uploaded') {
             var filename = localStorage.getItem('filename');
-
             document.querySelector('.BuildFileDescription').innerHTML = "<b>" + filename + "</b> is uploaded and ready to be built.";
             document.querySelector('.UploadContainer').classList.add('hidden');
             document.querySelector('.BuildContainer').classList.remove('hidden');
         }
-
         //building
         build.addEventListener('click', function () {
             document.querySelector('.ProgressBarContainer').classList.remove('hidden');
+            build.style.backgroundColor = '#bbb';
+            build.disabled = true;
+            document.querySelector('.BuildFileDescription').innerHTML = "<b>" + filename + "</b> is being added to the collection. <br> This might take a while. <b>Please don't close this page. </b>";
             var bar = document.querySelector('.ProgressBar');
             var left = 0;
             var id = setInterval(frame, 10);
             var direction = 1;
-
             function frame() {
                 if (direction == 1) {
                     if (left <= 80) {
@@ -108,13 +107,11 @@
                 }
             }
         });
-
         //build completed
         if (status == 'built') {
             document.querySelector('.SuccessContainer').classList.remove('hidden');
             document.querySelector('.UploadContainer').classList.add('hidden');
         }
-
         //reload
         function reload() {
             location.reload();
