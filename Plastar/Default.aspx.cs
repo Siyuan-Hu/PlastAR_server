@@ -11,11 +11,14 @@ using Ionic.Zip;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
+using System.Collections;
 
 namespace Plastar
 {
     public partial class _Default : Page
     {
+        Hashtable FileTable = new Hashtable();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -27,6 +30,9 @@ namespace Plastar
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             // 
             //Response.Write("<script>alert('init')</script>");
+
+            FileTable.Add("cast/model/rotatedView/000.png", false);
+
             ViewState["uploaded"] = false;
             ViewState["building"] = false;
             ViewState["uploading"] = false;
@@ -125,39 +131,6 @@ namespace Plastar
 
         private void Submit1_ServerClick(object sender, System.EventArgs e)
         {
-            //if ((File1.PostedFile != null) && (File1.PostedFile.ContentLength > 0))
-            //{
-            //    string fn = System.IO.Path.GetFileName(File1.PostedFile.FileName);
-            //    string SaveLocation = Server.MapPath("AssetsBundle") + "\\resource\\" + fn;
-            //    try
-            //    {
-            //        File1.PostedFile.SaveAs(SaveLocation);
-            //        Response.Write("The file has been uploaded.");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Response.Write("Error: " + ex.Message);
-            //        //Note: Exception.Message returns a detailed message that describes the current exception. 
-            //        //For security reasons, we do not recommend that you return Exception.Message to end users in 
-            //        //production environments. It would be better to return a generic error message. 
-            //    }
-            //}
-            //else
-            //{
-            //    Response.Write("Please select a file to upload.");
-            //}
-
-            //if ((bool)ViewState["building"])
-            //{
-            //    Response.Write("<script>alert('Wait for building!')</script>");
-            //    return;
-            //}
-
-            //if ((bool)ViewState["uploading"])
-            //{
-            //    Response.Write("<script>alert('Wait for uploading!')</script>");
-            //    return;
-            //}
             status.Text = "uploading";
 
             string extractPath = Server.MapPath("AssetsBundle") + "\\resource\\";
@@ -166,13 +139,19 @@ namespace Plastar
                 Response.Write("<script>alert('File structure not valid!')</script>");
                 return;
             }
+
             using (ZipFile zip = ZipFile.Read(File1.PostedFile.InputStream))
             {
+
                 bool flag = false;
 
                 //Response.Write("<script>alert('"+zip.EntryFileNames.ElementAt(0)+"')</script>");
                 for (int i = 0; i < zip.EntryFileNames.Count; i++)
                 {
+                    if (FileTable.Contains(zip.EntryFileNames.ElementAt(i)))
+                        FileTable[zip.EntryFileNames.ElementAt(i)] = true;
+
+
                     if (zip.EntryFileNames.ElementAt(i).Length>10 && zip.EntryFileNames.ElementAt(i).Substring(0, 10) == "cast/name/")
                     {
                         string str = zip.EntryFileNames.ElementAt(i).Substring(10);
@@ -189,12 +168,26 @@ namespace Plastar
                     return;
                 }
 
+                foreach (DictionaryEntry item in FileTable)
+                {
+                    if (!(bool)item.Value)
+                    {
+                        Response.Write("<script>alert('File structure not valid!')</script>");
+                        return;
+                    }
+                }
+
                 //ViewState["uploading"] = true;
 
                 zip.ExtractAll(extractPath, ExtractExistingFileAction.DoNotOverwrite);
                 ViewState["uploaded"] = true;
                 //ViewState["uploading"] = false;
             }
+
+            //foreach (string key in FileTable.Keys)
+            //{
+            //    FileTable[key] = false;
+            //}
 
             status.Text = "uploaded";
             Response.Write("<script>alert('" + "done!!!" + "')</script>");

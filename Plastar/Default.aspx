@@ -80,7 +80,7 @@
         build.addEventListener('click', function () {
             document.querySelector('.ProgressBarContainer').classList.remove('hidden');
             build.style.backgroundColor = '#bbb';
-            build.disabled = true;
+            //build.disabled = true;
             document.querySelector('.BuildFileDescription').innerHTML = "<b>" + filename + "</b> is being added to the collection. <br> This might take a while. <b>Please don't close this page. </b>";
             var bar = document.querySelector('.ProgressBar');
             var left = 0;
